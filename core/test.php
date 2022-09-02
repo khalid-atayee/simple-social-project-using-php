@@ -1,8 +1,10 @@
 <?php
 include 'Model.php';
-$model = new Model();
+include 'User.php';
+include 'Post.php';
+$post = new Post();
 $data = ["name"=>"khalid", "email"=>"khalid@gmail.com","password"=>"12432"];
-$query=$model->update($data,2);
+$query=$post->update($data,12);
 echo $query;
 
 

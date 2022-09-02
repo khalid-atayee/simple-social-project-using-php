@@ -2,22 +2,47 @@
 
 class Model{
 
-    protected $table='users';
-    protected $pk='id';
+    protected $table='';
+    protected $pk='';
     protected $connection ='';
 
 
     public function __construct()
     {
-        $this->connection = new mysqli('localhost','root','','socialminiphpproject');
+        $this->connection = new mysqli('localhost','root','','minisocialphp');
 
         
     }
-    public function select(){
-        $query = "SELECT * FROM {$this->table}";
-        $resutl = $this->connection->query($query);
-        $data = $resutl->fetch_all(MYSQLI_ASSOC);
-        return $data;
+
+    public function select($whereData=[],$single=false){
+        // $query = "";
+       
+        $select_query = "SELECT * FROM {$this->table} ";
+        if(count($whereData)){
+            $select_query .=" WHERE";
+            foreach ($whereData as $column => $value) {
+                $select_query .=" {$column}='{$value}'AND ";
+                
+            }
+            $select_query = trim($select_query,'AND ');
+            
+        }
+        // return $select_query;
+        $resutl = $this->connection->query($select_query);
+
+        if($single){
+
+            return $resutl->fetch_assoc();
+           
+
+        }
+        else{
+            
+           return $resutl->fetch_all(MYSQLI_ASSOC);
+            
+        }
+
+
     }
 
     
@@ -32,7 +57,10 @@ class Model{
         $column_values =trim($column_values,", ");
    
         $query = "INSERT INTO {$this->table} ($column_string) VALUES ($column_values)" ;
+        // return $query;
+        // var_dump($query);
         $this->connection->query($query);
+        // return $this->connection->insert_id;
 
     }
 
@@ -41,6 +69,8 @@ class Model{
         // return $query;
         $this->connection->query($query);
     }
+
+
 
     public function update($data,$id){
         $update_column='';
@@ -51,6 +81,7 @@ class Model{
 
         $query  = "UPDATE {$this->table} SET $update_column WHERE {$this->pk}={$id}";
         return $query;
+        // $this->connection->query($query);
     }
 
 

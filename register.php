@@ -1,6 +1,15 @@
-<?php include_once 'includes/header.php' ?>
+<?php 
+session_start();
+include_once 'includes/header.php';
+include_once 'helper/functions.php';
+
+if(is_authenticated()){
+    header('location: index.php');
+}
+
+?>
 <div class="container col-6 offset-3">
-    <form autocomplete="off">
+    <form method="POST" action="controller/register.php" autocomplete="off">
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Enter your Name</label>
             <input type="text" class="form-control" name="name" id="exampleInputEmail1" aria-describedby="emailHelp">
@@ -16,7 +25,7 @@
             <input type="password" class="form-control" name="password" id="exampleInputPassword1">
         </div>
        
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" name="user_submit_btn" class="btn btn-primary">Submit</button>
     </form>
 </div>
 
