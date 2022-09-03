@@ -3,10 +3,8 @@ session_start();
 include 'helper/functions.php';
 include 'core/Model.php';
 include 'core/Post.php';
-$auth = $_SESSION['user'];
-if(!is_authenticated()){
-    header('location: login.php');
-}
+
+
 ?>
 
 <?php include_once "includes/header.php"; ?>
@@ -23,7 +21,7 @@ if(!is_authenticated()){
 
  foreach ($posts as $post) {
 
-    echo '<div class="col-4"><div class="card" style="width: 18rem;">
+    echo '<div class="col-3"><div class="card" style="width: 18rem;">
     <img style="width:100%;height:240px" src="storage/posts/'.$post['post_image'].'" class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">'.$post['title'].'</h5>

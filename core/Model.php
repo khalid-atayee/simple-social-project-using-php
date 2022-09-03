@@ -14,7 +14,7 @@ class Model{
         
     }
 
-    public function select($whereData=[],$single=false){
+    public function select($whereData=[],$single=false,$id=null){
         // $query = "";
        
         $select_query = "SELECT * FROM {$this->table} ";
@@ -27,6 +27,10 @@ class Model{
             $select_query = trim($select_query,'AND ');
             
         }
+        if($id){
+            $select_query.="WHERE {$this->pk}=$id";
+        }
+      
         // return $select_query;
         $resutl = $this->connection->query($select_query);
 
@@ -64,9 +68,13 @@ class Model{
 
     }
 
-    public function delete($id){
+    public function delete($id,$image_path=null){
         $query = "DELETE FROM {$this->table} WHERE {$this->pk}={$id}";
         // return $query;
+        if($image_path){
+            unlink('../storage/posts/'.$image_path);
+        }
+       
         $this->connection->query($query);
     }
 
