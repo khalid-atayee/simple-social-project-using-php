@@ -21,8 +21,8 @@ include 'core/Post.php';
 
  foreach ($posts as $post) {
 
-    echo '<div class="col-3"><div class="card" style="width: 18rem;">
-    <img style="width:100%;height:240px" src="storage/posts/'.$post['post_image'].'" class="card-img-top" alt="...">
+    echo '<div  class="col-3"><div class="card">
+    <img style="width:100%;height:50%;object-fit:cover" src="storage/posts/'.$post['post_image'].'" class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">'.$post['title'].'</h5>
       <p class="card-text">'.$post['description'].'</p>

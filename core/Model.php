@@ -62,8 +62,10 @@ class Model{
    
         $query = "INSERT INTO {$this->table} ($column_string) VALUES ($column_values)" ;
         // return $query;
-        // var_dump($query);
+        // return $query;
+
         $this->connection->query($query);
+        return true;
         // return $this->connection->insert_id;
 
     }
@@ -88,8 +90,9 @@ class Model{
         $update_column = trim($update_column,', ');
 
         $query  = "UPDATE {$this->table} SET $update_column WHERE {$this->pk}={$id}";
-        return $query;
-        // $this->connection->query($query);
+        // return $query;
+        $this->connection->query($query);
+        return true;
     }
 
 

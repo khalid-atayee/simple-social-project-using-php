@@ -36,7 +36,10 @@ if(isset($_GET['post_id'])){
         if(isset($_GET['post_id'])){
             echo '<div class="mb-3">
             <img width="200px" src="storage/posts/'.$data['post_image'].'">
-            </div>';
+            </div>
+            <input type="hidden" class="form-control" value= "'.$data['post_image'].'" name="old_post_image" id="exampleInputPassword1">
+            ';
+            
         }
         ?>
         <div class="mb-3">
@@ -44,6 +47,10 @@ if(isset($_GET['post_id'])){
             <input type="file" class="form-control" name="post_image" id="exampleInputPassword1">
         </div>
         <input type="hidden" class="form-control" value= "<?php echo $auth['id']; ?>" name="user_id" id="exampleInputPassword1">
+        <?php if(isset($_GET['post_id'])){
+            echo '<input type="hidden" class="form-control" value= "'.$data['id'].'" name="post_pk_id" id="exampleInputPassword1">';
+        } ?>
+
 
        
         <button type="submit" name="<?php if(isset($_GET['post_id'])) echo'post_update_btn';else echo'post_create_btn';?>" class="btn btn-primary">Submit</button>
